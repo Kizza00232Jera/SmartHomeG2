@@ -1,12 +1,18 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { View, Text, TouchableOpacity } from 'react-native';
+import "../../global.css";
 
-const SettingsScreen = () => {
+export const SettingsScreen = () => {
   return (
-    <View>
-      <Text>SettingsScreen</Text>
-    </View>
-  )
-}
-
-export default SettingsScreen
+    <View className="flex-row justify-between items-center p-4">
+    <TouchableOpacity className="active:opacity-70">
+      <Ionicons name="arrow-back" size={24} color="#000" />
+    </TouchableOpacity>
+    <Text className="text-xl font-semibold">Settings</Text>
+    <TouchableOpacity className="active:opacity-70">
+      <Ionicons name="create-outline" size={24} color="#000" />
+    </TouchableOpacity>
+  </View>
+  );
+};

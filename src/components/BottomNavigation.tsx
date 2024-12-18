@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import "../../global.css";
+
 
 interface BottomNavigationProps {
   currentTab: string;
@@ -9,31 +11,35 @@ interface BottomNavigationProps {
 
 export const BottomNavigation = ({ currentTab, onTabChange }: BottomNavigationProps) => {
   return (
-    <View className="flex-row justify-around items-center py-4 bg-white border-t border-gray-200">
-      <TouchableOpacity 
-        onPress={() => onTabChange('notifications')}
-        className="active:opacity-70"
-      >
+    <View
+      style={{
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        paddingVertical: 10,
+        backgroundColor: 'white',
+        borderTopWidth: 1,
+        borderTopColor: '#ddd',
+        position: 'absolute',
+        bottom: 0, // Sticks the BottomNav to the bottom of the screen
+        width: '100%',
+      }}
+    >
+      <TouchableOpacity onPress={() => onTabChange('notifications')}>
         <Ionicons
           name="notifications"
           size={24}
           color={currentTab === 'notifications' ? '#00BCD4' : '#9CA3AF'}
         />
       </TouchableOpacity>
-      <TouchableOpacity 
-        onPress={() => onTabChange('home')}
-        className="active:opacity-70"
-      >
+      <TouchableOpacity onPress={() => onTabChange('home')}>
         <Ionicons
           name="home"
           size={24}
           color={currentTab === 'home' ? '#00BCD4' : '#9CA3AF'}
         />
       </TouchableOpacity>
-      <TouchableOpacity 
-        onPress={() => onTabChange('settings')}
-        className="active:opacity-70"
-      >
+      <TouchableOpacity onPress={() => onTabChange('settings')}>
         <Ionicons
           name="settings"
           size={24}

@@ -1,5 +1,7 @@
 import { View, Text, Switch, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import "../../global.css";
+
 
 interface SmartDeviceCardProps {
   title: string;

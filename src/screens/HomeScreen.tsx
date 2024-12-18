@@ -3,7 +3,8 @@ import { View, Text, TouchableOpacity, ScrollView, SafeAreaView } from 'react-na
 import { Ionicons } from '@expo/vector-icons';
 import { SmartDeviceCard } from '../components/SmartDeviceCard';
 import { SmartLightControl } from '../components/SmartLightControl';
-import { BottomNavigation } from '../components/BottomNavigation';
+import "../../global.css";
+
 
 export const HomeScreen = () => {
   const [devices, setDevices] = useState({
@@ -18,7 +19,6 @@ export const HomeScreen = () => {
     floor: 30,
   });
   
-  const [currentTab, setCurrentTab] = useState('home');
 
   return (
     <SafeAreaView className="flex-1 bg-gray-50">
@@ -88,10 +88,6 @@ export const HomeScreen = () => {
           </TouchableOpacity>
         </ScrollView>
 
-        <BottomNavigation
-          currentTab={currentTab}
-          onTabChange={setCurrentTab}
-        />
       </View>
     </SafeAreaView>
   );
