@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "559512104742",
+    "project_id": "smarthomefirebase-33f6d",
+    "storage_bucket": "smarthomefirebase-33f6d.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559512104742:android:29f08ff5cc2b0945991be7",
+        "android_client_info": {
+          "package_name": "com.group2.smarthome"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuocfR5xL56_szi5rOsjV6qKczcjQiCho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559512104742:android:39c6360e14a1bf23991be7",
+        "android_client_info": {
+          "package_name": "com.smarthome"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuocfR5xL56_szi5rOsjV6qKczcjQiCho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559512104742:android:78b8dea0940edf6e991be7",
+        "android_client_info": {
+          "package_name": "com.smarthomeiot"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCuocfR5xL56_szi5rOsjV6qKczcjQiCho"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

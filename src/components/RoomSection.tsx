@@ -10,7 +10,9 @@ interface RoomSectionProps {
 export function RoomSection({ roomName, children }: RoomSectionProps) {
   return (
     <View className="m-4">
-      <Text className="text-xl font-bold text-gray-900 mb-2">{roomName}</Text>
+      <Text className="text-xl font-bold text-gray-900 mb-2">
+        {roomName}
+      </Text>
       <ScrollView horizontal>
         <View className="flex flex-col">
           {children}
