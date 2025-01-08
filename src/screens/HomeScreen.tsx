@@ -1,24 +1,41 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import axios from 'axios';
 import { SmartDeviceCard } from '../components/SmartDeviceCard';
-import { SmartLightControl } from '../components/SmartLightControl';
 import "../../global.css";
 
+interface Device {
+  id: string;
+  isActive: boolean;
+  type: string;
+}
 
 export const HomeScreen = () => {
-  const [devices, setDevices] = useState({
-    doors: false,
-    tv1: false,
-    tv2: false,
-    camera: false,
-  });
-  
-  const [lights, setLights] = useState({
-    main: 50,
-    floor: 30,
-  });
-  
+  const [devices, setDevices] = useState<Device[]>([]);
+
+  // Fetch devices from the API
+  useEffect(() => {
+    const fetchDevices = async () => {
+      try {
+        const response = await axios.get('https://ms-iot-smart-security-production.up.railway.app/device/fetch');
+        setDevices(response.data);
+      } catch (error) {
+        console.error('Error fetching devices:', error);
+      }
+    };
+
+    fetchDevices();
+  }, []);
+
+  // Toggle device active state
+  const toggleDeviceState = (id: string) => {
+    setDevices((prevDevices) =>
+      prevDevices.map((device) =>
+        device.id === id ? { ...device, isActive: !device.isActive } : device
+      )
+    );
+  };
 
   return (
     <SafeAreaView className="flex-1 bg-gray-50">
@@ -35,59 +52,18 @@ export const HomeScreen = () => {
 
         <ScrollView className="flex-1 px-4">
           <View className="flex-row flex-wrap justify-between">
-            <View className="w-[48%] mb-4">
-              <SmartDeviceCard
-                title="Smart Doors"
-                icon="lock-closed-outline"
-                isEnabled={devices.doors}
-                onToggle={() => setDevices(prev => ({ ...prev, doors: !prev.doors }))}
-              />
-            </View>
-            <View className="w-[48%] mb-4">
-              <SmartDeviceCard
-                title="Smart TV"
-                icon="tv-outline"
-                isEnabled={devices.tv1}
-                onToggle={() => setDevices(prev => ({ ...prev, tv1: !prev.tv1 }))}
-              />
-            </View>
-            <View className="w-[48%] mb-4">
-              <SmartDeviceCard
-                title="Smart TV 2"
-                icon="tv-outline"
-                isEnabled={devices.tv2}
-                onToggle={() => setDevices(prev => ({ ...prev, tv2: !prev.tv2 }))}
-              />
-            </View>
-            <View className="w-[48%] mb-4">
-              <SmartDeviceCard
-                title="Smart Camera"
-                icon="camera-outline"
-                isEnabled={devices.camera}
-                onToggle={() => setDevices(prev => ({ ...prev, camera: !prev.camera }))}
-              />
-            </View>
+            {devices.map((device) => (
+              <View key={device.id} className="w-[48%] mb-4">
+                <SmartDeviceCard
+                  title={`Smart ${device.type}`}
+                  icon={device.type === 'LIGHT' ? 'bulb-outline' : 'lock-closed-outline'}
+                  isEnabled={device.isActive}
+                  onToggle={() => toggleDeviceState(device.id)}
+                />
+              </View>
+            ))}
           </View>
-
-          <View className="bg-white p-4 rounded-xl mt-4">
-            <Text className="text-xl font-semibold mb-4">Smart Lights</Text>
-            <SmartLightControl
-              title="Main light"
-              value={lights.main}
-              onValueChange={(value) => setLights(prev => ({ ...prev, main: value }))}
-            />
-            <SmartLightControl
-              title="Floor lamp"
-              value={lights.floor}
-              onValueChange={(value) => setLights(prev => ({ ...prev, floor: value }))}
-            />
-          </View>
-
-          <TouchableOpacity className="bg-[#00BCD4] p-4 rounded-xl mt-6 mb-4 active:opacity-80">
-            <Text className="text-white text-center text-lg font-semibold">Add device</Text>
-          </TouchableOpacity>
         </ScrollView>
-
       </View>
     </SafeAreaView>
   );

@@ -8,7 +8,7 @@ type NotificationItem = {
   creationAt: string;
   hasView: boolean;
   distance: number;
-  photo: string;
+  image: string;
 };
 
 type NotificationListProps = {
@@ -35,12 +35,12 @@ const NotificationList = ({ onSelectNotification }: NotificationListProps) => {
 
   const renderItem = ({ item }: { item: NotificationItem }) => (
     <TouchableOpacity onPress={() => onSelectNotification(item)}>
-      <View className="flex-row p-2 border-b border-gray-300">
-        <Image source={{ uri: item.photo }} className="w-12 h-12 mr-2" />
+      <View className={`flex-row p-2 border-b border-gray-300 ${item.hasView ? 'bg-gray-200' : ''}`}>
+        <Image source={{ uri: item.image }} className="w-12 h-12 mr-2" />
         <View className="flex-1">
           <Text>ID: {item.id}</Text>
           <Text>Created At: {new Date(item.creationAt).toLocaleString()}</Text>
-          <Text>Has View: {item.hasView ? "Yes" : "No"}</Text>
+          {/* <Text>Has View: {item.hasView ? "Yes" : "No"}</Text> */}
           <Text>Distance: {item.distance} meters</Text>
         </View>
       </View>

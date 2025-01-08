@@ -9,7 +9,7 @@ type NotificationItem = {
   creationAt: string;
   hasView: boolean;
   distance: number;
-  photo: string;
+  image: string;
 };
 
 export const NotificationScreen = () => {
@@ -39,14 +39,14 @@ export const NotificationScreen = () => {
         <View>
           {selectedNotification ? (
             <View className="p-4">
-              <Text>ID: {selectedNotification.id}</Text>
               <Text>Created At: {new Date(selectedNotification.creationAt).toLocaleString()}</Text>
-              <Text>Has View: {selectedNotification.hasView ? "Yes" : "No"}</Text>
               <Text>Distance: {selectedNotification.distance} meters</Text>
+              <Text>Viewed: {selectedNotification.hasView ? "Yes" : "No"}</Text>
               <Image
-                source={{ uri: selectedNotification.photo }}
+                source={{ uri: selectedNotification.image }}
                 className="w-full h-64 mt-4"
-              />
+                />
+                <Text>ID: {selectedNotification.id}</Text>
             </View>
           ) : (
             <NotificationList onSelectNotification={setSelectedNotification} />
