@@ -15,6 +15,28 @@ type NotificationItem = {
 export const NotificationScreen = () => {
   const [selectedNotification, setSelectedNotification] = useState<NotificationItem | null>(null);
 
+  const handleNotificationSelect = async (notification: NotificationItem) => {
+    // Set the selected notification
+    setSelectedNotification(notification);
+
+    // Trigger the endpoint to mark the notification as read
+    try {
+      const response = await fetch(
+        `https://ms-iot-smart-security-production.up.railway.app/notification/${notification.id}`,
+        {
+          method: "GET", // Using GET request to mark the notification as read
+        }
+      );
+      if (response.ok) {
+        console.log("Notification marked as read");
+      } else {
+        console.error("Failed to mark notification as read");
+      }
+    } catch (error) {
+      console.error("Error marking notification as read:", error);
+    }
+  };
+
   return (
     <SafeAreaView className="flex-1 bg-gray-50">
       <View className="flex-1">
@@ -27,7 +49,7 @@ export const NotificationScreen = () => {
               <Ionicons name="arrow-back" size={24} color="#000" />
             </TouchableOpacity>
           ) : (
-            <View style={{ width: 24 }} /> // Placeholder for alignment
+            <View style={{ width: 24 }} />
           )}
           <Text className="text-xl font-semibold">
             {selectedNotification ? "Notification Details" : "Notifications"}
@@ -45,11 +67,11 @@ export const NotificationScreen = () => {
               <Image
                 source={{ uri: selectedNotification.image }}
                 className="w-full h-64 mt-4"
-                />
-                <Text>ID: {selectedNotification.id}</Text>
+              />
+              <Text>ID: {selectedNotification.id}</Text>
             </View>
           ) : (
-            <NotificationList onSelectNotification={setSelectedNotification} />
+            <NotificationList onSelectNotification={handleNotificationSelect} />
           )}
         </View>
       </View>

@@ -21,7 +21,7 @@ export const BottomNavigation = ({ currentTab, onTabChange }: BottomNavigationPr
         borderTopWidth: 1,
         borderTopColor: '#ddd',
         position: 'absolute',
-        bottom: 0, // Sticks the BottomNav to the bottom of the screen
+        bottom: 0, 
         width: '100%',
       }}
     >
